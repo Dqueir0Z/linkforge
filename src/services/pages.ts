@@ -51,8 +51,9 @@ export async function resolvePublicPage(slug: string): Promise<{ page: LinkPageW
   if (result.status !== 'found' || !result.page) return { page: null, error: 'Página não encontrada.' };
 
   const p = result.page;
+  const pageId = p.id as string;
   const page: LinkPageWithLinks = {
-    id: p.id as string,
+    id: pageId,
     slug: p.slug as string,
     title: p.title as string,
     description: (p.description as string) || null,
@@ -62,7 +63,7 @@ export async function resolvePublicPage(slug: string): Promise<{ page: LinkPageW
     owner_id: null,
     page_links: (result.links || []).map((l) => ({
       id: l.id as string,
-      page_id: page.id,
+      page_id: pageId,
       label: l.label as string,
       url: l.url as string,
       position: l.position as number,
