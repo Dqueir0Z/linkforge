@@ -9,8 +9,8 @@ export default defineConfig({
     },
   },
   test: {
-    environment: 'jsdom',
-    globals: true,
-  include: ['src/**/*.test.ts'],
+    // As regras testadas (URL, alias, datas) são funções puras: não precisam de DOM.
+    environment: 'node',
+    include: ['src/**/*.test.ts'],
   },
 });
