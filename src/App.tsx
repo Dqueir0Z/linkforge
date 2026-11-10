@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { BrowserRouter, Routes, Route, useLocation, Outlet } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
 import { AuthProvider } from '@/contexts/AuthContext';
 import Layout from '@/components/Layout';
 import ProtectedRoute from '@/components/ProtectedRoute';
