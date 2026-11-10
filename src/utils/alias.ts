@@ -56,8 +56,15 @@ export function suggestAliasFromUrl(url: string): string | null {
     const segments = parsed.pathname.split('/').filter(Boolean);
     if (segments.length === 0) return null;
 
-    // Take the last meaningful segment
-    let suggestion = segments[segments.length - 1]
+    // Take the last meaningful segment. URL.pathname keeps accents percent-encoded
+    // ("Promo%C3%A7%C3%A3o"), so decode before stripping them.
+    let segment = segments[segments.length - 1];
+    try {
+      segment = decodeURIComponent(segment);
+    } catch {
+      // Malformed escape sequence: keep the raw segment.
+    }
+    const suggestion = segment
       .toLowerCase()
       .normalize('NFD')
       .replace(/[\u0300-\u036f]/g, '')
